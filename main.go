@@ -105,7 +105,8 @@ func checkCertType(cert *x509.Certificate) int {
 	certType := DV
 	if cert.Subject.Organization != nil {
 		certType = OV
-		if strings.Contains(cert.Issuer.CommonName, "Extend") {
+		issuer := cert.Issuer.CommonName
+		if strings.Contains(issuer, "Extend") || strings.Contains(issuer, "EV") {
 			certType = EV
 		}
 	}
